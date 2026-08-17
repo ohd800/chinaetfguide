@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chinese ADR Delisting Risk Checker — Is Your China Stock at Risk?</title>
+<meta name="description" content="Check the US delisting risk of any major China ADR (BABA, PDD, JD, BIDU, NIO…). See Hong Kong listing status, HFCAA/PCAOB audit status, and the conversion path — in plain English." />
+<meta name="keywords" content="Chinese ADR delisting risk, China ADR delisting, HFCAA, PCAOB, BABA PDD JD delisting" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://chinaequityhub.com/adr.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Chinese ADR Delisting Risk Checker — ChinaEquityHub" />
+<meta property="og:description" content="Check US delisting risk for any China ADR. See Hong Kong listing status, HFCAA/PCAOB audit status, and the conversion path." />
+<meta property="og:url" content="https://chinaequityhub.com/adr.html" />
+<meta property="og:image" content="https://chinaequityhub.com/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Chinese ADR Delisting Risk Checker — ChinaEquityHub" />
+<meta name="twitter:description" content="Check US delisting risk for any China ADR. See Hong Kong listing status, HFCAA/PCAOB status, and the conversion path." />
+<link rel="stylesheet" href="assets/styles.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://chinaequityhub.com/"},
+  {"@type":"ListItem","position":2,"name":"ADR Delisting Risk Checker","item":"https://chinaequityhub.com/adr.html"}
+]}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html" style="display:flex;align-items:center;gap:10px;color:inherit">
+      <div class="logo">中</div>
+      <div>ChinaEquityHub<small>PLAIN-ENGLISH CHINA EQUITY TOOLS</small></div>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="etf.html">ETF</a>
+      <a href="adr.html" class="active">ADR Risk</a>
+      <a href="broker.html">Broker</a>
+      <a href="symbols.html">Ticker</a>
+      <a href="guides/index.html">Guides</a>
+      <a href="learn.html">Market 101</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>China ADR <span class="hl">Delisting Risk Checker.</span></h1>
+    <p>Type a ticker or pick one. We show the single most important mitigant — a Hong Kong listing — plus HFCAA / PCAOB status and what happens if delisting ever forces the issue. Educational only; verify with official sources.</p>
+  </div>
+
+  <section id="adr">
+    <h2 class="sec-title">Check a China ADR <span class="asof">● Data as of Aug 2026</span><span class="live try" id="liveBadge">● Live: trying…</span></h2>
+    <p class="sec-sub">Prices try to update live; if the network blocks it, snapshot data is shown.</p>
+
+    <div class="adr-search">
+      <div class="ctrl-group">
+        <span class="ctrl-label">Search a China ADR</span>
+        <input type="text" id="adrInput" placeholder="e.g. BABA" maxlength="6" autocomplete="off" />
+      </div>
+      <div class="ctrl-group">
+        <span class="ctrl-label">Or pick one</span>
+        <select id="adrSelect"></select>
+      </div>
+      <div style="flex:1;min-width:240px">
+        <span class="ctrl-label">Popular</span>
+        <div class="quick" id="adrQuick"></div>
+      </div>
+    </div>
+
+    <div class="adr-card" id="adrCard"></div>
+  </section>
+
+  <section id="faq">
+    <h2 class="sec-title">ADR risk — quick FAQ</h2>
+    <details open><summary>What does "HFCAA delisting risk" mean?</summary><p>The Holding Foreign Companies Accountable Act (2020) lets the SEC delist a company after two consecutive years of denied PCAOB audit inspection. PCAOB secured access in Dec 2022, defusing the immediate countdown — but reporting shows political pressure to weaponise delisting re-emerged in 2025–26.</p></details>
+    <details><summary>Why is a Hong Kong listing the key mitigant?</summary><p>If a US listing were forced to close, holders of <b>dual-listed</b> names can usually convert their ADRs into HK shares through their broker. Names with <b>no HK listing</b> (e.g. PDD) have no obvious landing spot, so they carry more exposure.</p></details>
+    <details><summary>What is VIE risk, separate from delisting?</summary><p>Many Chinese firms use a Variable Interest Entity structure — a Cayman holding company with contractual (not ownership) control of the mainland assets. It's a structural/legal risk independent of US-China politics, and applies to most ADRs and ADR-heavy ETFs.</p></details>
+
+    <div class="disc">
+      <b>Disclaimer:</b> Educational only, <b>not financial advice</b>. Listing status, risk tiers and prices are indicative, compiled from public sources as of <b>August 2026</b>, and change over time. Verify current status with SEC EDGAR, PCAOB and HKEX before acting. Tax treatment varies by country.
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    ChinaEquityHub — a plain-English tool for foreign investors exploring Chinese equities. Built as a research prototype. Not affiliated with any issuer, broker, or exchange.
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/live.js"></script>
+<script>
+const riskLabel={Low:"LOW RISK",Med:"MEDIUM RISK",High:"HIGH RISK"};
+const adrCard=document.getElementById('adrCard');
+let currentTk="BABA";
+
+function showADR(tk){
+  const d=ADRs.find(x=>x.tk===tk);
+  currentTk=tk;
+  if(!d){ adrCard.innerHTML=`<div class="adr-note">Ticker not in our curated list. We cover the largest, most-discussed China ADRs. Try BABA, PDD, JD, BIDU, NIO, XPEV, NTES, TCOM, TME, BILI, WB or LI.</div>`; return; }
+  const hkYes=!!d.hk;
+  const tierCls=d.risk==="Low"?"low":(d.risk==="High"?"high":"med");
+  const convLine = hkYes
+    ? `If the US listing were ever forced to close, ADR holders of dual-listed names can <b>typically convert their ADRs into HK shares</b> through their broker (fees, timing and broker support vary). The HK line is the safety valve.`
+    : `With <b>no Hong Kong listing</b>, there is no straightforward conversion path — a US delisting would leave holders without an obvious onshore/Hong Kong venue, the key reason this name carries higher exposure.`;
+  const flagHtml = d.flagText ? `<div class="adr-note flag"><b>⚠ Political spotlight:</b> ${d.flagText}</div>` : "";
+  adrCard.innerHTML=`
+    <div class="adr-head">
+      <div class="tk">${d.tk}</div>
+      <div class="co">${d.co} · ${d.exch}</div>
+      <span class="tier ${tierCls}">${riskLabel[d.risk]}</span>
+    </div>
+    <div class="adr-grid">
+      <div class="adr-stat"><div class="k">Sector</div><div class="v">${d.sector}</div></div>
+      <div class="adr-stat"><div class="k">HK listing</div><div class="v ${hkYes?'ok':'no'}">${hkYes?('Yes · '+d.hk):'No'}</div></div>
+      <div class="adr-stat"><div class="k">HK status</div><div class="v">${d.hkType}</div></div>
+      <div class="adr-stat"><div class="k">Last price</div><div class="v" data-adr-last="${d.tk}">— (snapshot)</div></div>
+      <div class="adr-stat"><div class="k">Audit (HFCAA/PCAOB)</div><div class="v" style="font-size:13px">Access secured Dec 2022; political risk re-emerged 2025–26</div></div>
+    </div>
+    <div class="adr-note"><b>What it means:</b> ${convLine}</div>
+    ${flagHtml}
+    <div class="method"><b>How we score it:</b> the dominant mitigant against a US delisting is a Hong Kong listing. <b>Dual-primary</b> HK (BABA, LI) → Low. <b>HK secondary</b> listing → Medium (conversion generally possible, but the "root" is still the US). <b>No HK listing</b> (PDD) → High. This is an educational heuristic, not a forecast — verify current status with SEC EDGAR, PCAOB and HKEX. Data as of Aug 2026.</div>
+  `;
+}
+
+const adrSelect=document.getElementById('adrSelect');
+adrSelect.innerHTML=`<option value="">Choose a ticker…</option>`+ADRs.map(d=>`<option value="${d.tk}">${d.tk} — ${d.co}</option>`).join("");
+const adrQuick=document.getElementById('adrQuick');
+adrQuick.innerHTML=ADRs.slice(0,8).map(d=>`<button class="chip" data-tk="${d.tk}">${d.tk}</button>`).join("");
+adrQuick.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{showADR(c.dataset.tk);adrSelect.value=c.dataset.tk;adrInput.value=c.dataset.tk;}));
+adrSelect.addEventListener('change',e=>{if(e.target.value){showADR(e.target.value);adrInput.value=e.target.value;}});
+const adrInput=document.getElementById('adrInput');
+adrInput.addEventListener('input',e=>{
+  const v=e.target.value.trim().toUpperCase();
+  if(v.length>=2){ const hit=ADRs.find(d=>d.tk.startsWith(v)); if(hit){showADR(hit.tk);adrSelect.value=hit.tk;} else {adrCard.innerHTML=`<div class="adr-note">No match for "${v}". Try BABA, PDD, JD, BIDU, NIO, XPEV, NTES, TCOM, TME, BILI, WB or LI.</div>`;} }
+});
+
+/* ---- live price (best-effort) ---- */
+function tryLive(){
+  const badge=document.getElementById('liveBadge');
+  if(!window.ChinaLive){ badge.className='live off'; badge.textContent='● Live: unavailable'; return; }
+  const items=ADRs.map(d=>({key:d.tk, ticker:d.tk, venue:"us"}));
+  ChinaLive.fetchLive(items).then(res=>{
+    let any=false;
+    Object.keys(res).forEach(k=>{
+      const el=document.querySelector('[data-adr-last="'+k+'"]');
+      if(el && res[k]!=null){ any=true; el.textContent="$"+res[k].toFixed(2); }
+    });
+    if(any){ badge.className='live ok'; badge.textContent='● Live: on (Stooq)'; }
+    else { badge.className='live off'; badge.textContent='● Live: snapshot (network/CORS blocked)'; }
+  }).catch(()=>{ badge.className='live off'; badge.textContent='● Live: snapshot (unavailable)'; });
+}
+
+showADR("BABA");
+tryLive();
+</script>
+<script src="assets/feedback.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"What does HFCAA delisting risk mean?","acceptedAnswer":{"@type":"Answer","text":"The Holding Foreign Companies Accountable Act (2020) lets the SEC delist a company after consecutive years of denied PCAOB audit inspection. PCAOB secured access in late 2022, defusing the immediate countdown, but political pressure to weaponise delisting has re-emerged in 2025-26."}},
+  {"@type":"Question","name":"Why is a Hong Kong listing the key mitigant?","acceptedAnswer":{"@type":"Answer","text":"If a US listing were forced to close, holders of dual-listed names can usually convert their ADRs into Hong Kong shares through their broker. Names with no Hong Kong listing, such as PDD, have no obvious landing spot and carry more exposure."}},
+  {"@type":"Question","name":"What is VIE risk, separate from delisting?","acceptedAnswer":{"@type":"Answer","text":"Many Chinese firms use a Variable Interest Entity structure — a Cayman holding company with contractual, not ownership, control of the mainland assets. It is a structural and legal risk independent of US-China politics, and applies to most ADRs and ADR-heavy ETFs."}}
+]}
+</script>
+</body>
+</html>

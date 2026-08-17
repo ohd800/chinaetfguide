@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>China Stock Ticker Lookup — A-share, H-share &amp; ADR Codes for Any Company</title>
+<meta name="description" content="Type any Chinese company name or ticker and see all its codes at once: mainland A-share, Hong Kong H-share, and US-listed ADR — plus where a foreign investor can actually buy it." />
+<meta name="keywords" content="China stock ticker, Tencent stock ticker, BYD stock ticker, Alibaba ADR, China company to ticker, H-share code lookup" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://chinaequityhub.com/symbols.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="China Stock Ticker Lookup — ChinaEquityHub" />
+<meta property="og:description" content="Type any Chinese company or ticker — see its A-share, H-share and ADR codes and where a foreigner can buy it." />
+<meta property="og:url" content="https://chinaequityhub.com/symbols.html" />
+<meta property="og:image" content="https://chinaequityhub.com/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="China Stock Ticker Lookup — ChinaEquityHub" />
+<meta name="twitter:description" content="Type any Chinese company or ticker — see its A-share, H-share and ADR codes and where a foreigner can buy it." />
+<link rel="stylesheet" href="assets/styles.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://chinaequityhub.com/"},
+  {"@type":"ListItem","position":2,"name":"China Ticker Lookup","item":"https://chinaequityhub.com/symbols.html"}
+]}
+</script>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html" style="display:flex;align-items:center;gap:10px;color:inherit">
+      <div class="logo">中</div>
+      <div>ChinaEquityHub<small>PLAIN-ENGLISH CHINA EQUITY TOOLS</small></div>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="etf.html">ETF</a>
+      <a href="adr.html">ADR Risk</a>
+      <a href="broker.html">Broker</a>
+      <a href="symbols.html" class="active">Ticker</a>
+      <a href="guides/index.html">Guides</a>
+      <a href="learn.html">Market 101</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>China Stock Ticker Lookup</h1>
+    <p>Type a company name or any ticker — Alibaba, Tencent, BYD, <b>601318</b>, <b>0700.HK</b>, <b>BABA</b> — and see every code at once: mainland A-share, Hong Kong H-share and US ADR. No more guessing which market a symbol belongs to.</p>
+  </div>
+
+  <section id="lookup">
+    <div class="adr-search">
+      <input id="symInput" type="text" placeholder="Company name or ticker — e.g. Tencent, BYD, 0700.HK, BABA" autocomplete="off" />
+      <button id="symGo">Look up</button>
+    </div>
+    <div class="quickrow" id="quickRow"></div>
+    <div id="symResults"></div>
+    <p class="note" style="margin-top:18px">Codes are verified snapshots and can change (companies add or switch listings). Always confirm the current ticker with your broker or the exchange before trading. <b>Not financial advice.</b></p>
+  </section>
+
+  <section class="back" style="margin-top:10px">
+    <a href="learn.html">← What are A-shares, H-shares and ADRs?</a> · <a href="guides/a-shares-vs-h-shares.html">A-shares vs H-shares guide →</a>
+  </section>
+</div>
+
+<footer class="wrap">
+  <p>ChinaEquityHub · Plain-English tools for foreign investors in Chinese equities · Not financial advice.</p>
+</footer>
+
+<script>
+var COMPANIES = [
+  {name:"Tencent", sector:"Internet & gaming", a:null, h:"0700.HK", adr:null,
+   note:"Listed in Hong Kong only. No A-share or US ADR. Buy via the H-share (HKEX)."},
+  {name:"Alibaba", sector:"E-commerce & cloud", a:null, h:"9988.HK", adr:"BABA",
+   note:"Dual-primary listed in Hong Kong and New York. If US delisting ever happened, shares convert to HK (9988)."},
+  {name:"JD.com", sector:"E-commerce", a:null, h:"9618.HK", adr:"JD",
+   note:"Secondary HK listing alongside the US ADR. Conversion to HK is possible."},
+  {name:"Baidu", sector:"Search & AI", a:null, h:"9888.HK", adr:"BIDU",
+   note:"Secondary HK listing alongside the US ADR. Conversion to HK is possible."},
+  {name:"NIO", sector:"Electric vehicles", a:null, h:"9866.HK", adr:"NIO",
+   note:"Secondary HK listing alongside the US ADR. Conversion to HK is possible."},
+  {name:"XPeng", sector:"Electric vehicles", a:null, h:"9868.HK", adr:"XPEV",
+   note:"Secondary HK listing alongside the US ADR. Conversion to HK is possible."},
+  {name:"Li Auto", sector:"Electric vehicles", a:null, h:"2015.HK", adr:"LI",
+   note:"Dual-primary listed in Hong Kong and New York — strongest HK safety net of the EV trio."},
+  {name:"PDD Holdings", sector:"E-commerce (Temu)", a:null, h:null, adr:"PDD",
+   note:"US-listed ONLY. No Hong Kong listing — the highest delisting-exposure ADR of the group. See the ADR risk tool."},
+  {name:"Meituan", sector:"Food delivery & local services", a:null, h:"3690.HK", adr:null,
+   note:"Listed in Hong Kong only. No A-share or US ADR. Buy via the H-share."},
+  {name:"NetEase", sector:"Games & media", a:null, h:"9999.HK", adr:"NTES",
+   note:"Secondary HK listing alongside the US ADR. Conversion to HK is possible."},
+  {name:"Trip.com", sector:"Online travel", a:null, h:"9961.HK", adr:"TCOM",
+   note:"Secondary HK listing alongside the US ADR. Conversion to HK is possible."},
+  {name:"Bilibili", sector:"Video & community", a:null, h:"9626.HK", adr:"BILI",
+   note:"Secondary HK listing alongside the US ADR. Conversion to HK is possible."},
+  {name:"Weibo", sector:"Social media", a:null, h:"9898.HK", adr:"WB",
+   note:"Secondary HK listing alongside the US ADR. Conversion to HK is possible."},
+  {name:"BYD", sector:"Electric vehicles & batteries", a:"002594.SZ", h:"1211.HK", adr:null,
+   note:"Rare double listing: mainland A-share (Shenzhen) AND Hong Kong H-share. No US ADR currently. Foreigners usually reach it via the H-share."},
+  {name:"Kweichow Moutai", sector:"Premium liquor", a:"600519.SH", h:null, adr:null,
+   note:"Mainland A-share only (Shanghai). No HK or US listing — hardest for foreigners to access directly; usually reached via an A-share ETF."},
+  {name:"ICBC", sector:"Banking", a:"601398.SH", h:"1398.HK", adr:null,
+   note:"Both A-share (Shanghai) and H-share (Hong Kong). Foreigners typically use the H-share."},
+  {name:"China Mobile", sector:"Telecom", a:"600941.SH", h:"0941.HK", adr:null,
+   note:"Both A-share and H-share. Its US ADR was delisted in 2021; the H-share is the foreigner-friendly route."},
+  {name:"CNOOC", sector:"Oil & gas", a:"600938.SH", h:"0883.HK", adr:null,
+   note:"Both A-share and H-share. US ADR was delisted; use the H-share."},
+  {name:"Ping An", sector:"Insurance & finance", a:"601318.SH", h:"2318.HK", adr:null,
+   note:"Both A-share (Shanghai) and H-share (Hong Kong). Foreigners usually use the H-share."},
+  {name:"China Construction Bank", sector:"Banking", a:"601939.SH", h:"0939.HK", adr:null,
+   note:"Both A-share and H-share. Foreigners typically use the H-share."}
+];
+
+var POPULAR = ["Tencent","Alibaba","BYD","PDD Holdings","NIO","Meituan","JD.com","Baidu"];
+
+function symBlock(mkt, code, marketLabel, buyable){
+  if(!code){
+    return '<div class="sym na"><div class="mkt">'+mkt+'</div><div class="code">—</div></div>';
+  }
+  var link = buyable ? '<a href="broker.html">'+code+'</a>' : code;
+  return '<div class="sym"><div class="mkt">'+mkt+'</div><div class="code">'+link+'</div></div>';
+}
+
+function render(company){
+  var html = '<div class="symcard">';
+  html += '<h3>'+company.name+'</h3>';
+  html += '<div class="sector">'+company.sector+'</div>';
+  html += '<div class="symrow">';
+  html += symBlock("A-share", company.a, "A-share", true);
+  html += symBlock("H-share", company.h, "H-share", true);
+  html += symBlock("US ADR", company.adr, "ADR", true);
+  html += '</div>';
+  html += '<div class="symnote">'+company.note+'</div>';
+  html += '<div class="symlinks">';
+  if(company.adr) html += '<a href="adr.html">Check '+company.adr+' delisting risk →</a>';
+  html += '<a href="broker.html">How to buy →</a>';
+  if(company.a) html += '<a href="learn.html">What is an A-share? →</a>';
+  html += '</div>';
+  html += '</div>';
+  return html;
+}
+
+function search(q){
+  q = (q||"").trim().toLowerCase();
+  var res = document.getElementById("symResults");
+  if(!q){ res.innerHTML = ""; return; }
+  var matches = COMPANIES.filter(function(c){
+    if(c.name.toLowerCase().indexOf(q)>=0) return true;
+    if(c.adr && c.adr.toLowerCase()===q) return true;
+    if(c.h && c.h.toLowerCase().indexOf(q)>=0) return true;
+    if(c.a && c.a.toLowerCase().indexOf(q)>=0) return true;
+    return false;
+  });
+  // exact ticker match first
+  matches.sort(function(a,b){
+    var sa = (a.adr&&a.adr.toLowerCase()===q)||(a.h&&a.h.toLowerCase()===q)||(a.a&&a.a.toLowerCase()===q) ? 0:1;
+    var sb = (b.adr&&b.adr.toLowerCase()===q)||(b.h&&b.h.toLowerCase()===q)||(b.a&&b.a.toLowerCase()===q) ? 0:1;
+    return sa-sb;
+  });
+  if(matches.length===0){
+    res.innerHTML = '<div class="symcard"><div class="symnote">No company found for "<b>'+q+'</b>". Try a name like <b>Tencent</b> or a ticker like <b>0700.HK</b> / <b>BABA</b>. The database covers the most-searched Chinese companies; more are added over time.</div></div>';
+    return;
+  }
+  res.innerHTML = matches.map(render).join("");
+}
+
+document.getElementById("symGo").addEventListener("click", function(){
+  search(document.getElementById("symInput").value);
+});
+document.getElementById("symInput").addEventListener("keyup", function(e){
+  if(e.key==="Enter") search(this.value);
+});
+document.getElementById("symInput").addEventListener("input", function(){
+  if(this.value.trim().length>=2) search(this.value);
+});
+
+var qr = document.getElementById("quickRow");
+POPULAR.forEach(function(name){
+  var b = document.createElement("button");
+  b.className="quickbtn"; b.textContent=name;
+  b.addEventListener("click", function(){
+    document.getElementById("symInput").value=name;
+    search(name);
+  });
+  qr.appendChild(b);
+});
+</script>
+<script src="assets/feedback.js"></script>
+</body>
+</html>

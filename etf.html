@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Best China ETF Comparison Tool — Compare MCHI, FXI, KWEB, ASHR, CQQQ, GXC</title>
+<meta name="description" content="Compare the best China ETFs side by side in plain English: MCHI, FXI, KWEB, ASHR, CQQQ, GXC. Filter by strategy, sort by fee or size, see live prices and pick the right China exposure." />
+<meta name="keywords" content="best China ETF, compare China ETFs, MCHI, FXI, KWEB, ASHR, CQQQ, GXC" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://chinaequityhub.com/etf.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Best China ETF Comparison Tool — ChinaEquityHub" />
+<meta property="og:description" content="Compare the best China ETFs side by side: MCHI, FXI, KWEB, ASHR, CQQQ, GXC. Filter, sort, and see live prices." />
+<meta property="og:url" content="https://chinaequityhub.com/etf.html" />
+<meta property="og:image" content="https://chinaequityhub.com/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Best China ETF Comparison Tool — ChinaEquityHub" />
+<meta name="twitter:description" content="Compare the best China ETFs side by side: MCHI, FXI, KWEB, ASHR, CQQQ, GXC." />
+<link rel="stylesheet" href="assets/styles.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://chinaequityhub.com/"},
+  {"@type":"ListItem","position":2,"name":"China ETF Comparator","item":"https://chinaequityhub.com/etf.html"}
+]}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html" style="display:flex;align-items:center;gap:10px;color:inherit">
+      <div class="logo">中</div>
+      <div>ChinaEquityHub<small>PLAIN-ENGLISH CHINA EQUITY TOOLS</small></div>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="etf.html" class="active">ETF</a>
+      <a href="adr.html">ADR Risk</a>
+      <a href="broker.html">Broker</a>
+      <a href="symbols.html">Ticker</a>
+      <a href="guides/index.html">Guides</a>
+      <a href="learn.html">Market 101</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>China ETF Comparator <span class="hl">in plain English.</span></h1>
+    <p>Filter by strategy or listing location, sort by what matters to you, then tick up to 3 funds to compare side-by-side. Prices try to update live; if the network blocks it, verified snapshot data is shown.</p>
+    <div class="pillrow">
+      <span class="pill">MCHI</span><span class="pill">FXI</span><span class="pill">KWEB</span>
+      <span class="pill">ASHR</span><span class="pill">CQQQ</span><span class="pill">GXC</span>
+    </div>
+  </div>
+
+  <section id="comparator">
+    <h2 class="sec-title">Compare China equity ETFs <span class="asof">● Data as of Aug 2026</span><span class="live try" id="liveBadge">● Live: trying…</span></h2>
+    <p class="sec-sub">Expense ratios, AUM and yields are indicative snapshot figures — see the disclaimer.</p>
+
+    <div class="controls">
+      <div class="ctrl-group">
+        <span class="ctrl-label">Strategy</span>
+        <div class="chips" id="themeChips">
+          <button class="chip active" data-theme="all">All</button>
+          <button class="chip" data-theme="Broad">Broad</button>
+          <button class="chip" data-theme="Large-cap">Large-cap</button>
+          <button class="chip" data-theme="Internet">Internet</button>
+          <button class="chip" data-theme="Tech">Tech</button>
+          <button class="chip" data-theme="A-shares">A-shares</button>
+        </div>
+      </div>
+      <div class="ctrl-group">
+        <span class="ctrl-label">Listing location</span>
+        <div class="chips" id="expoChips">
+          <button class="chip active" data-expo="all">All</button>
+          <button class="chip" data-expo="Offshore">Offshore (HK + US)</button>
+          <button class="chip" data-expo="Onshore">Onshore (A-shares)</button>
+        </div>
+      </div>
+      <div class="ctrl-group">
+        <span class="ctrl-label">Sort by</span>
+        <select id="sortSel">
+          <option value="aum">AUM (high → low)</option>
+          <option value="expense">Expense ratio (low → high)</option>
+          <option value="yield">Dividend yield (high → low)</option>
+          <option value="holdings">Holdings count (high → low)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid" id="cardGrid"></div>
+  </section>
+</div>
+
+  <section id="faq" class="wrap" style="margin-top:30px">
+    <h2 class="sec-title">China ETF — common questions</h2>
+    <div class="faq">
+      <details><summary>What is the easiest China ETF for a beginner?</summary><p>A broad, low-cost fund like MCHI or FXI gives diversified exposure without picking individual stocks. Most foreigners start here because it trades in an ordinary brokerage account in their own country.</p></details>
+      <details><summary>What is the difference between MCHI and FXI?</summary><p>MCHI tracks the MSCI China index — broad and market-cap weighted across Hong Kong and US-listed ADRs. FXI tracks the FTSE China 50, which skews toward the largest state-linked giants (banks, telcos, energy).</p></details>
+      <details><summary>Which China ETF actually holds mainland A-shares?</summary><p>ASHR holds mainland A-shares (the CSI 300 index). The others (MCHI, FXI, KWEB, CQQQ) hold Hong Kong and US-listed shares, not directly the Shanghai/Shenzhen market.</p></details>
+      <details><summary>Are China ETFs safe?</summary><p>An ETF reduces single-stock risk but not market risk. China exposure still carries equity, currency, political and regulatory risk. Size your position accordingly. This is educational, not financial advice.</p></details>
+      <details><summary>Do I need a Chinese brokerage account?</summary><p>No. These US-listed ETFs trade in a normal brokerage account abroad. Use the <a href="broker.html">Broker / Access Finder</a> to confirm access from your country.</p></details>
+    </div>
+  </section>
+
+<footer>
+  <div class="wrap">
+    ChinaEquityHub — a plain-English tool for foreign investors exploring Chinese equities. Built as a research prototype. Not affiliated with any issuer, broker, or exchange.
+  </div>
+</footer>
+
+<!-- Compare tray -->
+<div class="tray" id="tray">
+  <div class="tray-inner">
+    <span class="tlabel">Compare:</span>
+    <div class="tsel" id="traySel"></div>
+    <button class="compare-act" id="openCompare">Compare (<span id="trayCount">0</span>)</button>
+    <button class="clear" id="clearCmp">Clear</button>
+  </div>
+</div>
+
+<!-- Compare modal -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <button class="x" id="closeModal">×</button>
+    <h2>Side-by-side comparison</h2>
+    <p class="sec-sub" style="margin-bottom:0">Highlighted cells show the better value for that metric.</p>
+    <div id="cmpTable"></div>
+    <p class="legend">Low expense &amp; high yield are highlighted as "better". AUM and holdings are shown for context, not as good/bad.</p>
+  </div>
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/live.js"></script>
+<script>
+let state = {theme:"all", expo:"all", sort:"aum", selected:new Set()};
+const grid = document.getElementById('cardGrid');
+function aumNum(a){ return parseFloat(a.replace(/[^\d.]/g,'')); }
+
+function render(){
+  let list = ETFs.filter(e=>(state.theme==="all"||e.theme===state.theme)&&(state.expo==="all"||e.expo===state.expo));
+  list.sort((a,b)=>{
+    if(state.sort==="aum") return aumNum(b.aum)-aumNum(a.aum);
+    if(state.sort==="expense") return a.expense-b.expense;
+    if(state.sort==="yield") return b.yieldN-a.yieldN;
+    if(state.sort==="holdings") return b.holdings-a.holdings;
+  });
+  grid.innerHTML = list.map(e=>{
+    const on = state.selected.has(e.tk);
+    const expoBadge = e.expo==="Onshore" ? `<span class="badge b-on">Onshore · A-shares</span>` : `<span class="badge b-off">Offshore · HK/US</span>`;
+    return `<div class="card ${on?'selected':''}" data-tk="${e.tk}">
+      <div class="card-top"><div><div class="tk">${e.tk}</div><div class="issuer">${e.issuer}</div></div></div>
+      <h3>${e.name}</h3>
+      <div class="badges"><span class="badge b-theme">${e.theme}</span>${expoBadge}</div>
+      <div class="stats">
+        <div class="stat"><div class="k">Expense</div><div class="v">${e.expense.toFixed(2)}%</div></div>
+        <div class="stat"><div class="k">AUM</div><div class="v">${e.aum}</div></div>
+        <div class="stat"><div class="k">Yield</div><div class="v">${e.yield}</div></div>
+        <div class="stat"><div class="k">Holdings</div><div class="v">${e.holdings}</div></div>
+      </div>
+      <div class="top-h">Top: <span>${e.top.join(" · ")}</span></div>
+      <div class="top-h" style="margin-top:6px">Last: <span data-last="${e.tk}">— (snapshot)</span></div>
+      <div class="card-foot">
+        <button class="cmp-btn ${on?'on':''}" data-tk="${e.tk}">${on?'✓ Selected':'+ Compare'}</button>
+      </div>
+    </div>`;
+  }).join("");
+  bindCards();
+}
+
+function bindCards(){
+  document.querySelectorAll('.cmp-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const tk=b.dataset.tk;
+      if(state.selected.has(tk)) state.selected.delete(tk);
+      else { if(state.selected.size>=3){ alert("You can compare up to 3 ETFs at once."); return;} state.selected.add(tk); }
+      updateTray(); render();
+    });
+  });
+}
+
+function updateTray(){
+  const tray=document.getElementById('tray');
+  const sel=document.getElementById('traySel');
+  const cnt=document.getElementById('trayCount');
+  cnt.textContent=state.selected.size;
+  sel.innerHTML=[...state.selected].map(tk=>`<span class="tchip">${tk} <b data-tk="${tk}">×</b></span>`).join("");
+  sel.querySelectorAll('b').forEach(x=>x.addEventListener('click',()=>{state.selected.delete(x.dataset.tk);updateTray();render();}));
+  tray.classList.toggle('show',state.selected.size>0);
+}
+
+const modalBg=document.getElementById('modalBg');
+document.getElementById('openCompare').addEventListener('click',()=>{
+  if(state.selected.size<2){ alert("Select at least 2 ETFs to compare."); return; }
+  buildCompare();
+  modalBg.classList.add('show');
+});
+document.getElementById('closeModal').addEventListener('click',()=>modalBg.classList.remove('show'));
+modalBg.addEventListener('click',e=>{if(e.target===modalBg)modalBg.classList.remove('show');});
+document.getElementById('clearCmp').addEventListener('click',()=>{state.selected.clear();updateTray();render();});
+
+function buildCompare(){
+  const sel=ETFs.filter(e=>state.selected.has(e.tk));
+  const minExp=Math.min(...sel.map(e=>e.expense));
+  const maxYld=Math.max(...sel.map(e=>e.yieldN));
+  const rows=[
+    ["Issuer",e=>e.issuer],
+    ["Strategy",e=>e.theme],
+    ["Listing",e=>e.expo+" · "+(e.expo==="Onshore"?"A-shares":"HK/US")],
+    ["Tracks",e=>e.index],
+    ["Expense ratio",e=>e.expense.toFixed(2)+"%",e=>e.expense===minExp],
+    ["AUM",e=>e.aum],
+    ["Dividend yield",e=>e.yield,e=>e.yieldN===maxYld],
+    ["# Holdings",e=>e.holdings],
+    ["Top holdings",e=>e.top.join(", ")],
+    ["Best for",e=>e.best]
+  ];
+  let html=`<table class="cmp"><thead><tr><th>Metric</th>${sel.map(e=>`<th>${e.tk}</th>`).join("")}</tr></thead><tbody>`;
+  rows.forEach(r=>{
+    const fn=r[1], hi=r[2];
+    html+=`<tr><td class="metric">${r[0]}</td>`;
+    sel.forEach(e=>{ const v=fn(e); const best=hi&&hi(e); html+=`<td class="${best?'best':''}">${v}</td>`; });
+    html+=`</tr>`;
+  });
+  html+=`</tbody></table>`;
+  document.getElementById('cmpTable').innerHTML=html;
+}
+
+document.getElementById('themeChips').addEventListener('click',e=>{
+  if(!e.target.dataset.theme)return;
+  document.querySelectorAll('#themeChips .chip').forEach(c=>c.classList.remove('active'));
+  e.target.classList.add('active'); state.theme=e.target.dataset.theme; render();
+});
+document.getElementById('expoChips').addEventListener('click',e=>{
+  if(!e.target.dataset.expo)return;
+  document.querySelectorAll('#expoChips .chip').forEach(c=>c.classList.remove('active'));
+  e.target.classList.add('active'); state.expo=e.target.dataset.expo; render();
+});
+document.getElementById('sortSel').addEventListener('change',e=>{state.sort=e.target.value;render();});
+
+/* ---- live prices (best-effort) ---- */
+function tryLive(){
+  const badge=document.getElementById('liveBadge');
+  if(!window.ChinaLive){ badge.className='live off'; badge.textContent='● Live: unavailable'; return; }
+  const items=ETFs.map(e=>({key:e.tk, ticker:e.tk, venue:"us"}));
+  ChinaLive.fetchLive(items).then(res=>{
+    let any=false;
+    Object.keys(res).forEach(k=>{
+      const el=document.querySelector('[data-last="'+k+'"]');
+      if(el && res[k]!=null){ any=true; el.textContent="$"+res[k].toFixed(2); }
+    });
+    if(any){ badge.className='live ok'; badge.textContent='● Live: on (Stooq)'; }
+    else { badge.className='live off'; badge.textContent='● Live: snapshot (network/CORS blocked)'; }
+  }).catch(()=>{ badge.className='live off'; badge.textContent='● Live: snapshot (unavailable)'; });
+}
+
+render();
+tryLive();
+</script>
+<script src="assets/feedback.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"What is the easiest China ETF for a beginner?","acceptedAnswer":{"@type":"Answer","text":"A broad, low-cost fund like MCHI or FXI gives diversified exposure without picking individual stocks, and it trades in an ordinary brokerage account abroad."}},
+  {"@type":"Question","name":"What is the difference between MCHI and FXI?","acceptedAnswer":{"@type":"Answer","text":"MCHI tracks the MSCI China index (broad, across Hong Kong and US-listed ADRs); FXI tracks the FTSE China 50, which skews toward the largest state-linked giants."}},
+  {"@type":"Question","name":"Which China ETF actually holds mainland A-shares?","acceptedAnswer":{"@type":"Answer","text":"ASHR holds mainland A-shares (the CSI 300 index). The others — MCHI, FXI, KWEB, CQQQ — hold Hong Kong and US-listed shares."}},
+  {"@type":"Question","name":"Are China ETFs safe?","acceptedAnswer":{"@type":"Answer","text":"An ETF reduces single-stock risk but not market risk. China exposure still carries equity, currency, political and regulatory risk."}},
+  {"@type":"Question","name":"Do I need a Chinese brokerage account?","acceptedAnswer":{"@type":"Answer","text":"No. These US-listed ETFs trade in a normal brokerage account in your own country."}}
+]}
+</script>
+</body>
+</html>
