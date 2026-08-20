@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-ChinaEquityHub — programmatic SEO page generator.
+ChinaETFGuide — programmatic SEO page generator.
 Generates:
   * guides/how-to-invest-from-<region>.html  (8 region guides)
   * stocks/<company>.html                    (20 company pages)
@@ -15,7 +15,7 @@ Run:  python tools/generate_pages.py   (from repo root)
 import os, re, json, html
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOMAIN = "https://chinaequityhub.com"
+DOMAIN = "https://chinaetfguide.com"
 ASOF = "August 2026"
 
 # ----------------------------------------------------------------------------
@@ -136,7 +136,7 @@ def header(active, subfolder):
   <div class="wrap nav">
     <a class="brand" href="{p}index.html" style="display:flex;align-items:center;gap:10px;color:inherit">
       <div class="logo">中</div>
-      <div>ChinaEquityHub<small>PLAIN-ENGLISH CHINA EQUITY TOOLS</small></div>
+      <div>ChinaETFGuide<small>PLAIN-ENGLISH CHINA EQUITY TOOLS</small></div>
     </a>
     <nav class="navlinks">
       <a href="{p}index.html">Home</a>
@@ -170,7 +170,7 @@ EXTRA_STYLE = '''<style>
 def footer(subfolder):
     return '''<footer>
   <div class="wrap">
-    ChinaEquityHub — a plain-English tool for foreign investors exploring Chinese equities. Built as a research prototype. Not affiliated with any issuer, broker, or exchange.
+    ChinaETFGuide — a plain-English tool for foreign investors exploring Chinese equities. Built as a research prototype. Not affiliated with any issuer, broker, or exchange.
   </div>
 </footer>'''
 

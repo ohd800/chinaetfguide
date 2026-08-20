@@ -1,4 +1,4 @@
-# ChinaEquityHub — SEO Plan (based on 哥飞 / gefei7 methodology)
+# ChinaETFGuide — SEO Plan (based on 哥飞 / gefei7 methodology)
 
 > Methodology source: 哥飞 (公众号 gefei7) 出海 SEO 打法，核心要点：
 > 1. 先收集关键词 → 看搜索意图 → 再规划网站结构（不先搭首页再想词）
@@ -40,6 +40,6 @@
 - [ ] 冷启动外链：Product Hunt / HN / 周刊 / AI 导航站（上线后执行）
 
 ## 4. 待用户补充
-- 真实域名（替换 chinaequityhub.com 占位）→ 同时更新 canonical / og:url / sitemap
+- 真实域名（替换 chinaetfguide.com 占位）→ 同时更新 canonical / og:url / sitemap
 - Google Analytics ID（替换 G-XXXXXXX 占位）
 - OG 图片 assets/og.png（建议 1200×630）

@@ -1,4 +1,4 @@
-# ChinaEquityHub
+# ChinaETFGuide
 
 Plain-English tools for foreign investors exploring Chinese equities
 (ETF comparator · ADR delisting-risk checker · broker/access finder ·
@@ -25,10 +25,10 @@ python -m http.server 8099
 ```
 
 ## Deploy (GitHub + Vercel) — step by step
-1. Create an empty repo on GitHub (e.g. `chinaequityhub`).
+1. Create an empty repo on GitHub (e.g. `chinaetfguide.com`).
 2. Push this folder:
    ```bash
-   git remote add origin https://github.com/<you>/chinaequityhub.git
+   git remote add origin https://github.com/<you>/chinaetfguide.com.git
    git branch -M main
    git push -u origin main
    ```
@@ -37,10 +37,10 @@ python -m http.server 8099
    - Build command: leave empty
    - Output directory: `.` (root)
    - Deploy.
-4. Vercel gives you `https://chinaequityhub.vercel.app`.
+4. Vercel gives you `https://chinaetfguide.com.vercel.app`.
 
 ## After deploy — required edits
-The site currently uses the brand placeholder `https://chinaequityhub.com`
+The site currently uses the brand placeholder `https://chinaetfguide.com`
 in `canonical`, `og:url` (6 pages) and `sitemap.xml`. Replace it with your
 real domain (Vercel subdomain, or a custom domain once connected):
 - 6 × `<link rel="canonical" ...>` + `<meta property="og:url" ...>`

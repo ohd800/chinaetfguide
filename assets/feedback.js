@@ -1,4 +1,4 @@
-/* ChinaEquityHub — lightweight feedback widget (email mode, no backend)
+/* ChinaETFGuide — lightweight feedback widget (email mode, no backend)
  * Visitor ratings + comments open their mail client pre-filled to the owner's address.
  * Swap EMAIL below to change the destination. */
 (function () {
@@ -18,7 +18,7 @@
   panel.innerHTML =
     '<div class="fb-head"><strong>Share your feedback</strong>' +
     '<button id="fb-close" aria-label="Close">×</button></div>' +
-    '<p class="fb-sub">Help us improve ChinaEquityHub. Submitting opens your email app — your message goes straight to ' +
+    '<p class="fb-sub">Help us improve ChinaETFGuide. Submitting opens your email app — your message goes straight to ' +
     EMAIL + '.</p>' +
     '<div class="fb-stars" id="fb-stars" role="radiogroup" aria-label="Rating">' +
     [1, 2, 3, 4, 5].map(function (i) {
@@ -61,7 +61,7 @@
       alert("Please add a comment or a star rating first.");
       return;
     }
-    var subject = "ChinaEquityHub Feedback";
+    var subject = "ChinaETFGuide Feedback";
     var body = [
       "Page: " + location.href,
       "Rating: " + (rating ? rating + "/5" : "-"),

@@ -1,4 +1,4 @@
-/* ===== Shared data for ChinaEquityHub (classic script — defines globals) ===== */
+/* ===== Shared data for ChinaETFGuide (classic script — defines globals) ===== */
 /* All figures are indicative snapshots compiled from public fund / exchange
    sources as of August 2026. Verify before investing. */
 
