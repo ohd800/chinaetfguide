@@ -41,5 +41,5 @@
 
 ## 4. 待用户补充
 - 真实域名（替换 chinaetfguide.com 占位）→ 同时更新 canonical / og:url / sitemap
-- Google Analytics ID（替换 G-XXXXXXX 占位）
+- Google Analytics ID（替换 G-8M2YLYLQDV 占位）
 - OG 图片 assets/og.png（建议 1200×630）

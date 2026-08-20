@@ -48,7 +48,7 @@ real domain (Vercel subdomain, or a custom domain once connected):
 (Use search-and-replace across the repo; then re-commit & redeploy.)
 
 ## Analytics (optional)
-`index.html` has a commented GA4 snippet. Replace `G-XXXXXXX` with your
+`index.html` has a commented GA4 snippet. Replace `G-8M2YLYLQDV` with your
 GA4 Measurement ID to start collecting traffic data.
 
 ## Notes
