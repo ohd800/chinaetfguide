@@ -37,6 +37,7 @@ section{padding:30px 0}
 .live.try{color:var(--muted);background:#f3f5f8}
 .live.ok{color:var(--good);background:var(--good-soft);border-color:#bfead2}
 .live.off{color:var(--warn);background:var(--warn-soft);border-color:#f0dca0}
+.live.cache{color:#1f6feb;background:#eaf2ff;border-color:#c5dbff}
 /* Tool hub on home */
 .hub{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:6px}
 .hubcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transition:.15s;display:flex;flex-direction:column}

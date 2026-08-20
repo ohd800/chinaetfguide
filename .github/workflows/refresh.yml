@@ -1,0 +1,39 @@
+name: Refresh market data
+
+# Keeps the site's price snapshot fresh without a paid API key.
+# Runs every Monday 06:17 UTC and can also be triggered manually
+# from the Actions tab (workflow_dispatch).
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch latest delayed prices from Stooq
+        run: python scripts/refresh_data.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.email "11587939@qq.com"
+          git config user.name "ChinaETFGuide Bot"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No price changes this run."
+          else
+            git commit -m "data: weekly price refresh ($(date -u +%Y-%m-%d))"
+            git push
+          fi

@@ -152,8 +152,10 @@ function tryLive(){
       const el=document.querySelector('[data-adr-last="'+k+'"]');
       if(el && res[k]!=null){ any=true; el.textContent="$"+res[k].toFixed(2); }
     });
-    if(any){ badge.className='live ok'; badge.textContent='● Live: on (Stooq)'; }
-    else { badge.className='live off'; badge.textContent='● Live: snapshot (network/CORS blocked)'; }
+    const meta=res.__meta||{};
+    if(meta.live){ badge.className='live ok'; badge.textContent='● Live: on (Stooq)'; }
+    else if(meta.cachedUpdated){ badge.className='live cache'; badge.textContent='● Cached prices (updated '+String(meta.cachedUpdated).slice(0,10)+')'; }
+    else { badge.className='live off'; badge.textContent='● Snapshot (live & cache unavailable)'; }
   }).catch(()=>{ badge.className='live off'; badge.textContent='● Live: snapshot (unavailable)'; });
 }
 
