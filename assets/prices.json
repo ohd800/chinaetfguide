@@ -1,5 +1,24 @@
 {
-  "updated": null,
-  "source": "Stooq (delayed, key-less)",
-  "prices": {}
+  "updated": "2026-08-28T04:38:02Z",
+  "source": "Nasdaq (delayed, key-less)",
+  "prices": {
+    "MCHI.US": 54.9,
+    "FXI.US": 35.24,
+    "KWEB.US": 26.1,
+    "ASHR.US": 34.56,
+    "CQQQ.US": 49.02,
+    "GXC.US": 90.8931,
+    "BABA.US": 116.31,
+    "LI.US": 12.18,
+    "JD.US": 28.49,
+    "BIDU.US": 96.94,
+    "NTES.US": 122.69,
+    "NIO.US": 4.36,
+    "XPEV.US": 11.33,
+    "TCOM.US": 44.61,
+    "TME.US": 8.66,
+    "BILI.US": 16.765,
+    "WB.US": 6.98,
+    "PDD.US": 84.69
+  }
 }

@@ -1,78 +1,106 @@
 #!/usr/bin/env python3
-"""Fetch latest delayed quotes from Stooq and write assets/prices.json.
+"""Fetch latest delayed quotes from Nasdaq and write assets/prices.json.
 
-Run by the scheduled GitHub Action so the site's price snapshot stays fresh
-without a paid API key. On failure it preserves the previous file (never
-overwrites good data with an empty result)."""
+Why Nasdaq (not Stooq/Yahoo):
+  Stooq and Yahoo's free endpoints block datacenter IPs, so they return
+  404/403 from GitHub Actions runners and the weekly refresh never writes
+  anything. Nasdaq's public quote API is reachable without a key from CI,
+  which is what makes the scheduled refresh actually work.
 
-import csv
-import io
+Key format written to prices.json: "MCHI.US" (uppercase ticker + venue),
+matching what assets/live.js expects for its cache fallback.
+
+Failure handling (fixes the old "stuck-empty" bug):
+  - Per-symbol failures are skipped, not fatal.
+  - If a run fetches nothing BUT a previous good cache exists, the previous
+    file is preserved (never overwrite good data with empty).
+  - If a run fetches at least one price, it always writes (so an initially
+    empty baseline can never freeze the file at empty forever).
+"""
+
 import json
 import os
+import time
 import urllib.request
-import datetime
 
 # US-listed China ETFs + ADRs tracked by the site.
+# (ticker, Nasdaq assetclass) — ETFs use "etf", everything else "stocks".
 TICKERS = [
     # ETFs
-    "MCHI", "FXI", "KWEB", "ASHR", "CQQQ", "GXC",
+    ("MCHI", "etf"), ("FXI", "etf"), ("KWEB", "etf"),
+    ("ASHR", "etf"), ("CQQQ", "etf"), ("GXC", "etf"),
     # ADRs
-    "BABA", "LI", "JD", "BIDU", "NTES", "NIO", "XPEV",
-    "TCOM", "TME", "BILI", "WB", "PDD",
+    ("BABA", "stocks"), ("LI", "stocks"), ("JD", "stocks"), ("BIDU", "stocks"),
+    ("NTES", "stocks"), ("NIO", "stocks"), ("XPEV", "stocks"), ("TCOM", "stocks"),
+    ("TME", "stocks"), ("BILI", "stocks"), ("WB", "stocks"), ("PDD", "stocks"),
 ]
-VENUE = "us"
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "Accept": "application/json",
+}
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 OUT = os.path.normpath(os.path.join(HERE, "..", "assets", "prices.json"))
 
 
-def fetch_csv():
-    syms = "+".join(f"{t.lower()}.{VENUE}" for t in TICKERS)
-    url = f"https://stooq.com/q/l/?s={syms}&f=sd2t2ohlcv&h&e=csv"
-    req = urllib.request.Request(
-        url, headers={"User-Agent": "Mozilla/5.0 (compatible; ChinaETFGuideBot/1.0)"}
-    )
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read().decode("utf-8", "replace")
+def fetch_one(symbol, assetclass):
+    url = f"https://api.nasdaq.com/api/quote/{symbol}/info?assetclass={assetclass}"
+    req = urllib.request.Request(url, headers=HEADERS)
+    with urllib.request.urlopen(req, timeout=20) as r:
+        doc = json.load(r)
+    primary = (doc.get("data") or {}).get("primaryData") or {}
+    raw = primary.get("lastSalePrice")
+    if not raw or raw in ("N/A", "-", "--", ""):
+        return None
+    return float(raw.replace("$", "").replace(",", "").strip())
 
 
-def parse_prices(txt):
-    prices = {}
-    reader = csv.reader(io.StringIO(txt))
-    rows = list(reader)
-    for row in rows[1:]:
-        if len(row) < 7:
-            continue
-        sym = row[0].strip().upper()  # e.g. MCHI.US
-        try:
-            close = float(row[6])
-        except ValueError:
-            continue
-        if close:
-            prices[sym] = round(close, 4)
-    return prices
+def load_previous():
+    if not os.path.exists(OUT):
+        return {}, None
+    try:
+        with open(OUT, encoding="utf-8") as f:
+            j = json.load(f)
+        return (j.get("prices") or {}), j.get("updated")
+    except Exception:
+        return {}, None
 
 
 def main():
-    try:
-        txt = fetch_csv()
-        prices = parse_prices(txt)
-    except Exception as e:
-        print("FETCH FAILED:", e)
-        if os.path.exists(OUT):
-            print("Keeping previous prices.json (no overwrite with empty data).")
-            return
-        prices = {}
+    previous, prev_updated = load_previous()
+    prices = dict(previous)  # start from last good cache
+    fetched = 0
 
-    if not prices:
-        if os.path.exists(OUT):
-            print("No prices parsed; keeping previous file.")
+    for symbol, assetclass in TICKERS:
+        key = f"{symbol}.US"
+        try:
+            price = fetch_one(symbol, assetclass)
+            if price is not None:
+                prices[key] = round(price, 4)
+                fetched += 1
+            else:
+                print(f"  {symbol}: no price returned (kept previous if any)")
+        except Exception as e:
+            print(f"  {symbol}: WARN {repr(e)[:80]}")
+        time.sleep(0.4)  # be polite to Nasdaq
+
+    print(f"Fetched {fetched}/{len(TICKERS)} prices this run.")
+
+    if fetched == 0:
+        if previous:
+            print("No new prices; previous cache preserved, nothing to write.")
             return
-        prices = {}
+        # Nothing fetched and no previous cache -> write an empty-but-flagged file.
+        data = {"updated": None, "source": "Nasdaq (delayed, key-less)", "prices": {}}
+        with open(OUT, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2)
+        print("Wrote empty prices.json (no data, no previous cache).")
+        return
 
     data = {
-        "updated": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "source": "Stooq (delayed, key-less)",
+        "updated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "source": "Nasdaq (delayed, key-less)",
         "prices": prices,
     }
     with open(OUT, "w", encoding="utf-8") as f:
